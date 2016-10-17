@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html ng-app="mycalc">
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="angular/calculator.js"></script>
+</head>
+<style>
+    .card-view {
+        padding: 50px;
+        border-radius: 5px;
+        background-color: #42A5F5;
+        border: 1px solid #dad4d4;
+    }
+    
+    .panel-default {
+        font-size: 250%;
+        background-color: #42A5F5;
+        border-color: #42A5F5;
+    }
+    
+    .panel-body {
+        color: white;
+    }
+
+</style>
+
+<body ng-controller="calculatorcontroller">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4 card-view">
+
+                <div class="row">
+
+                    <div class="panel panel-default">
+                        <div class="panel-body text-right">
+                            <p ng-model="exp" ng-cloak>{{exp}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row ">
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('7')">7</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('8')">8</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('9')">9</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('+')">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('4')">4</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('5')">5</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('6')">6</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('-')">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('1')">1</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('2')">2</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('3')">3</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('*')">*</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('C')">C</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('0')">0</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('.')">.</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="pressed('/')">/</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" ng-click="evaluteAnswer()">Ans</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <!--<div class="container card-view">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="panel panel-default">
+                <div class="panel-body text-right">
+                    Basic panel example
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4 ">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">7</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">8</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">9</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">4</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">5</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">6</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">-</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">1</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">2</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">3</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">/</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">C</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">0</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">.</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">*</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+
+    </div>
+
+</div>-->
+
+</body>
+
+
+</html>
